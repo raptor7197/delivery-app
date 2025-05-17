@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
     <div>
-      skibidi sigma
+      skibidi sigma whooo 
+      <Navbar/>
     </div>
   )
 }
