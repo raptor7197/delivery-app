@@ -1,12 +1,11 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar.jsx'
 
 const App = () => {
   return (
-    <div>
-      skibidi sigma whooo 
-      <Navbar/>
-    </div>
+    <span>
+      hello there
+    </span>
   )
 }
 
