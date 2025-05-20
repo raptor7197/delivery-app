@@ -3,14 +3,17 @@ import React, { createContext, useContext, useState, useMemo } from 'react';
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(true);
   const [isSeller, setIsSeller] = useState(false);
+  const [showUserLogin, setShowUserLogin] = useState(false);
   
   const value = useMemo(() => ({ 
     user, 
     setUser, 
     isSeller, 
-    setIsSeller 
+    setIsSeller ,
+    showUserLogin,
+    setShowUserLogin
   }), [user, isSeller]);
   
   return (
