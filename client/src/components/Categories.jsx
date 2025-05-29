@@ -15,7 +15,7 @@ const Categories = () => {
         {categories && categories.length > 0 ? (
           categories.map((category) => (
             <div 
-              key={category.id || category.path} 
+              key={category.name || category.path} 
               className="group cursor-pointer py-5 px-3 gap-2 rounded-lg flex flex-col justify-center items-center"
               style={{ backgroundColor: category.bgColor }}
               onClick={() => {

@@ -1,4 +1,7 @@
 import React, { createContext, useContext, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { dummyProducts } from '../assets/assets';
+
 
 export const AppContext = createContext();
 
@@ -6,6 +9,14 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(true);
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
+  const [products,setProducts] = useState(false);
+
+  const fetchProducts = async ()=>{
+    setProducts(dummyProducts)
+  }
+  useEffect(()=> {
+    fetchProducts()
+  },[])
   
   const value = useMemo(() => ({ 
     user, 
@@ -13,7 +24,8 @@ export const AppProvider = ({ children }) => {
     isSeller, 
     setIsSeller ,
     showUserLogin,
-    setShowUserLogin
+    setShowUserLogin,
+    products
   }), [user, isSeller]);
   
   return (
