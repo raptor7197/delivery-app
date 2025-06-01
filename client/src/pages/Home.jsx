@@ -6,9 +6,9 @@ import BestSeller from '../components/BestSeller'
 const Home = () => {
   return (
     <div className='mt-10'>
-      <MainBanner/>
-      <Categories/>
-      <BestSeller/>
+      <MainBanner />
+      <Categories />
+      <BestSeller />
     </div>
   )
 }

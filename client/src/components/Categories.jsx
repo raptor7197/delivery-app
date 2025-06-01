@@ -1,11 +1,12 @@
 import React from 'react'
 import { useAppContext } from '../context/AppContext'
 import { useNavigate } from 'react-router-dom'
+import { categories } from '../assets/assets'
 
 const Categories = () => {
   const navigate = useNavigate()
-  const { categories } = useAppContext() 
-
+  
+  
   return (
     <div className='mt-16'>
       <p className='text-2xl md:text-3xl font-medium'>
@@ -15,7 +16,7 @@ const Categories = () => {
         {categories && categories.length > 0 ? (
           categories.map((category) => (
             <div 
-              key={category.name || category.path} 
+              key={category.text || category.path} 
               className="group cursor-pointer py-5 px-3 gap-2 rounded-lg flex flex-col justify-center items-center"
               style={{ backgroundColor: category.bgColor }}
               onClick={() => {
