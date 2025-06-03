@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { assets } from "../assets/assets.js";
@@ -19,13 +18,13 @@ const Navbar = () => {
           <img className="h-9" src={assets.logo} alt="logo" />
         </NavLink>
 
-        {/* desktop  */}
+       
         <div className="hidden sm:flex items-center gap-8">
           <NavLink href="/">Home</NavLink>
           <NavLink href="/">All Products</NavLink>
           <NavLink href="/">Contact</NavLink>
 
-          {/* search box */}
+          
           <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
             <input
               className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
@@ -46,7 +45,8 @@ const Navbar = () => {
 
           {!user ? (
             <button
-              onClick={() => setshowUserLogin(true)}
+              onClick={() => {setshowUserLogin(true)
+                setOpen(false)}}
               className="cursor-pointer px-8 py-2 bg-teal-500 hover:bg-teal-600 transition text-white rounded-full"
             >
               Login
@@ -86,7 +86,7 @@ const Navbar = () => {
           
         </button>
 
-        {/* mobile  */}
+        
         {open && (
           <div
             className={`${

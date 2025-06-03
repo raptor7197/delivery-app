@@ -177,7 +177,7 @@ export const footerLinks = [
   },
 ];
 
-export const features = [
+export const ws = [
   {
     icon: delivery_truck_icon,
     title: "Fastest Delivery",
