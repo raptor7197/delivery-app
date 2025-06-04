@@ -1,14 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { assets } from "../assets/assets.js";
 import { useAppContext } from "../context/AppContext.jsx";
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
-  const { user, setUser, setShowUserLogin, navigate } = useAppContext(false);
+  const [open, setOpen] = useState(false);
+  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery } = useAppContext();
+  
   const logout = async () => {
     setUser(null);
     navigate("/");
+  };
+  
+  // Debug: Add console logs to track search functionality
+  useEffect(() => {
+    console.log("Search query changed:", searchQuery);
+    if (searchQuery && searchQuery.length > 0) {
+      console.log("Navigating to products page");
+      navigate("/products");
+    }
+  }, [searchQuery, navigate]);
+
+  // Handle search input change with debugging
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    console.log("Search input changed:", value);
+    setSearchQuery(value);
+  };
+
+  // Handle search submit (when user presses Enter)
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery && searchQuery.trim().length > 0) {
+      console.log("Search submitted:", searchQuery);
+      navigate("/products");
+    }
   };
 
   return (
@@ -18,28 +44,32 @@ const Navbar = () => {
           <img className="h-9" src={assets.logo} alt="logo" />
         </NavLink>
 
-       
         <div className="hidden sm:flex items-center gap-8">
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="/">All Products</NavLink>
-          <NavLink href="/">Contact</NavLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/products">All Products</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
 
-          
-          <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-            <input
+          {/* Search form with proper form handling */}
+          <form 
+            onSubmit={handleSearchSubmit}
+            className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full"
+          >
+            <input 
+              onChange={handleSearchChange}
+              value={searchQuery || ""} // Ensure controlled input with fallback
               className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
               type="text"
               placeholder="Search products"
             />
-            
-            <img src={assets.search_icon} alt="search" />
-          </div>
+            <button type="submit" className="cursor-pointer">
+              <img src={assets.search_icon} alt="search" />
+            </button>
+          </form>
 
-          <div onClick={()=> navigate("cart")} className="relative cursor-pointer">
-           
+          <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
             <img src={assets.cart_icon} alt="cart" />
-            <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">3
-              
+            <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">
+              3
             </button>
           </div>
 
@@ -54,7 +84,7 @@ const Navbar = () => {
               Login
             </button>
           ) : (
-            <div className="relative  group">
+            <div className="relative group">
               <img
                 src={assets.profile_icon}
                 alt="user icon"
@@ -62,17 +92,16 @@ const Navbar = () => {
               />
               <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-300 rounded-md text-sm z-40 w-30 p-4">
                 <li
-                  onClick={() => navigate("my-orders")}
+                  onClick={() => navigate("/my-orders")}
                   className="p-1.5 pl-2 hover:bg-primary/10 cursor-pointer"
                 >
-                  My orders{" "}
+                  My orders
                 </li>
                 <li
                   onClick={logout}
                   className="p-1.5 pl-2 hover:bg-primary/10 cursor-pointer"
                 >
-                  {" "}
-                  Logout{" "}
+                  Logout
                 </li>
               </ul>
             </div>
@@ -80,34 +109,28 @@ const Navbar = () => {
         </div>
 
         <button
-          onClick={() => (open ? setOpen(false) : setOpen(true))}
+          onClick={() => setOpen(!open)}
           aria-label="Menu"
           className="sm:hidden"
         >
           <img src={assets.menu_icon} alt="menu" />
-          
         </button>
 
-        
         {open && (
-          <div
-            className={`${
-              open ? "flex" : "hidden"
-            } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-center gap-2 px-5 text-sm md:hidden`}
-          >
+          <div className="absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex flex-col items-center gap-2 px-5 text-sm md:hidden">
             <NavLink to="/" onClick={() => setOpen(false)} className="block">
               Home
             </NavLink>
             <NavLink
               to="/products"
               onClick={() => setOpen(false)}
-              className="block "
+              className="block"
             >
               All Products
             </NavLink>
             {user && (
               <NavLink
-                to="/contact"
+                to="/my-orders"
                 onClick={() => setOpen(false)}
                 className="block"
               >
@@ -121,6 +144,23 @@ const Navbar = () => {
             >
               Contact
             </NavLink>
+
+            {/* Mobile search */}
+            <form 
+              onSubmit={handleSearchSubmit}
+              className="flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full mt-2 w-full max-w-xs"
+            >
+              <input 
+                onChange={handleSearchChange}
+                value={searchQuery || ""}
+                className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
+                type="text"
+                placeholder="Search products"
+              />
+              <button type="submit" className="cursor-pointer">
+                <img src={assets.search_icon} alt="search" />
+              </button>
+            </form>
 
             {!user ? (
               <button
