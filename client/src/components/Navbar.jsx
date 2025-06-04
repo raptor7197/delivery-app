@@ -5,7 +5,7 @@ import { useAppContext } from "../context/AppContext.jsx";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const { user, setUser, setshowUserLogin, navigate } = useAppContext(false);
+  const { user, setUser, setShowUserLogin, navigate } = useAppContext(false);
   const logout = async () => {
     setUser(null);
     navigate("/");
@@ -38,15 +38,17 @@ const Navbar = () => {
           <div onClick={()=> navigate("cart")} className="relative cursor-pointer">
            
             <img src={assets.cart_icon} alt="cart" />
-            <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">
-              3
+            <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">3
+              
             </button>
           </div>
 
           {!user ? (
             <button
-              onClick={() => {setshowUserLogin(true)
-                setOpen(false)}}
+              onClick={() => {
+                setShowUserLogin(true);
+                setOpen(false);
+              }}
               className="cursor-pointer px-8 py-2 bg-teal-500 hover:bg-teal-600 transition text-white rounded-full"
             >
               Login
