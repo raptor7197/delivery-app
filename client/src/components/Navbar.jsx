@@ -12,7 +12,6 @@ const Navbar = () => {
     navigate("/");
   };
   
-  // Debug: Add console logs to track search functionality
   useEffect(() => {
     console.log("Search query changed:", searchQuery);
     if (searchQuery && searchQuery.length > 0) {
@@ -21,14 +20,12 @@ const Navbar = () => {
     }
   }, [searchQuery, navigate]);
 
-  // Handle search input change with debugging
   const handleSearchChange = (e) => {
     const value = e.target.value;
     console.log("Search input changed:", value);
     setSearchQuery(value);
   };
 
-  // Handle search submit (when user presses Enter)
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery && searchQuery.trim().length > 0) {
@@ -49,14 +46,13 @@ const Navbar = () => {
           <NavLink to="/products">All Products</NavLink>
           <NavLink to="/contact">Contact</NavLink>
 
-          {/* Search form with proper form handling */}
           <form 
             onSubmit={handleSearchSubmit}
             className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full"
           >
             <input 
               onChange={handleSearchChange}
-              value={searchQuery || ""} // Ensure controlled input with fallback
+              value={searchQuery || ""} 
               className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
               type="text"
               placeholder="Search products"
@@ -145,7 +141,6 @@ const Navbar = () => {
               Contact
             </NavLink>
 
-            {/* Mobile search */}
             <form 
               onSubmit={handleSearchSubmit}
               className="flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full mt-2 w-full max-w-xs"
