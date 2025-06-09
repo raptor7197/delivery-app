@@ -8,6 +8,8 @@ import { useAppContext } from "./context/AppContext.jsx";
 import Login from "./components/Login.jsx";
 import AllProducts from "./pages/AllProducts.jsx";
 import ProductCategory from "./pages/ProductCategory.jsx";
+import ProductDetails from "./pages/ProductDetails.jsx";
+
 
 
 const App = () => {
@@ -25,7 +27,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
            <Route path="/products" element={<AllProducts />} />
            <Route path="/products/:category" element={<ProductCategory />} />
-         
+            <Route path="/products/:category/:id" element={<ProductDetails/>} />
+        
         </Routes>
       </div>
       <Footer/>

@@ -65,7 +65,7 @@ const Navbar = () => {
           <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
             <img src={assets.cart_icon} alt="cart" />
             <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">
-              3
+              69
             </button>
           </div>
 

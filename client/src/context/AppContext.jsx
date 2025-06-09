@@ -49,7 +49,22 @@ export const AppProvider = ({ children }) => {
     setCartItems(cartData);
     toast.success("Item removed from cart");
   };
-
+  const getcartCount =()=>{
+    let totalCount=0;
+    for (const item in cartItems) {
+      totalCount+=cartItems[item];
+    }
+return totalCount;      
+  }
+  const getcartAmount =()=> {
+  let totalAmount=0;
+  for (const items in cartItems) {
+     let itemInfo = products.find((product)=> product._id === items);
+     if(cartItems[items]>0) {
+      totalAmount+= itemInfo.offerPrice*cartItems[items]
+     }
+  }
+}
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -68,7 +83,9 @@ export const AppProvider = ({ children }) => {
     removeFromCart,
     cartItems,
     searchQuery,
-    setsearchQuery
+    setsearchQuery,
+    getcartAmount,
+    getcartCount
   }), [user, isSeller, products, cartItems]); 
 
   return (
