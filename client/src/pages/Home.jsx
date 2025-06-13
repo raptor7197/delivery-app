@@ -1,21 +1,21 @@
-import React from 'react'
-import MainBanner from '../components/MainBanner'
-import Categories from '../components/Categories'
-import BestSeller from '../components/BestSeller'
-import BottomBanner from '../components/BottomBanner'
-import NewsLetter from '../components/Newsletter'
-import Footer from '../components/Footer'
+import React from "react";
+import MainBanner from "../components/MainBanner";
+import Categories from "../components/Categories";
+import BestSeller from "../components/BestSeller";
+import BottomBanner from "../components/BottomBanner";
+import NewsLetter from "../components/Newsletter";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div className='mt-10'>
+    <div className="mt-10">
       <MainBanner />
       <Categories />
       <BestSeller />
-      <BottomBanner/>
-      <NewsLetter/>
+      <BottomBanner />
+      <NewsLetter />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

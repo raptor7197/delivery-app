@@ -5,13 +5,21 @@ import { useAppContext } from "../context/AppContext.jsx";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user, setUser, setShowUserLogin, navigate, setSearchQuery, searchQuery } = useAppContext();
-  
+  const {
+    user,
+    setUser,
+    setShowUserLogin,
+    navigate,
+    setSearchQuery,
+    searchQuery,
+    getcartCount,
+  } = useAppContext();
+
   const logout = async () => {
     setUser(null);
     navigate("/");
   };
-  
+
   useEffect(() => {
     console.log("Search query changed:", searchQuery);
     if (searchQuery && searchQuery.length > 0) {
@@ -46,13 +54,13 @@ const Navbar = () => {
           <NavLink to="/products">All Products</NavLink>
           <NavLink to="/contact">Contact</NavLink>
 
-          <form 
+          <form
             onSubmit={handleSearchSubmit}
             className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full"
           >
-            <input 
+            <input
               onChange={handleSearchChange}
-              value={searchQuery || ""} 
+              value={searchQuery || ""}
               className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
               type="text"
               placeholder="Search products"
@@ -61,13 +69,6 @@ const Navbar = () => {
               <img src={assets.search_icon} alt="search" />
             </button>
           </form>
-
-          <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
-            <img src={assets.cart_icon} alt="cart" />
-            <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">
-              69
-            </button>
-          </div>
 
           {!user ? (
             <button
@@ -112,6 +113,25 @@ const Navbar = () => {
           <img src={assets.menu_icon} alt="menu" />
         </button>
 
+        <div className="flex items-center gap-6 sm:hidden ">
+          <div
+     open       onClick={() => navigate("/cart")}
+            className="relative cursor-pointer"
+          >
+            <img src={assets.nav_cart_icon} alt="cart" />
+            <button className="absolute -top-2 -right-3 text-xs text-white bg-teal-500 w-[18px] h-[18px] rounded-full">
+              {getcartCount()}
+            </button>
+            <button
+              onClick={() => open ? setOpen(false) : setOpen(true)}
+              aria-label="Menu"
+              className="sm:hidden"
+            >
+              <img src={assets.menu_icon} alt="menu" />
+            </button>
+          </div>
+        </div>
+
         {open && (
           <div className="absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex flex-col items-center gap-2 px-5 text-sm md:hidden">
             <NavLink to="/" onClick={() => setOpen(false)} className="block">
@@ -141,11 +161,11 @@ const Navbar = () => {
               Contact
             </NavLink>
 
-            <form 
+            <form
               onSubmit={handleSearchSubmit}
               className="flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full mt-2 w-full max-w-xs"
             >
-              <input 
+              <input
                 onChange={handleSearchChange}
                 value={searchQuery || ""}
                 className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
