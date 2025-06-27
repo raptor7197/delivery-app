@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets.js";
 
-// Correctly defined InputField component
 const InputField = ({ type, placeholder, name, handleChange, value }) => (
   <input
     className="w-full px-2 py-2.5 border border-gray-500/30 rounded outline-none text-gray-500 focus:border-primary transition"
@@ -38,7 +37,6 @@ const AddAddress = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log("Submitted Address:", address);
-    // add your submit logic here
   };
 
   return (
