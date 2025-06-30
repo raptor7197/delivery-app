@@ -9,7 +9,7 @@ const SellerLogin = () => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
-    if (email === "seller@example.com" && password === "password") {
+    if (email === "test@mail.com" && password === "toor") {
       setIsSeller(true);
     } else {
       alert("Invalid credentials"); 

@@ -17,7 +17,7 @@ export const AppProvider = ({ children }) => {
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [products, setProducts] = useState([]);
-  const [cartItems, setCartItems] = useState({}); 
+  const [cartItems, setCartItems] = useState({});
   const [searchQuery, setsearchQuery] = useState("");
 
   const fetchProducts = async () => {
@@ -39,13 +39,13 @@ export const AppProvider = ({ children }) => {
 
   const updateCartItem = (itemId, quantity) => {
     let cartData = structuredClone(cartItems);
-    
+
     if (quantity <= 0) {
       delete cartData[itemId];
     } else {
       cartData[itemId] = quantity;
     }
-    
+
     setCartItems(cartData);
     toast.success("Cart Updated");
   };
@@ -74,11 +74,11 @@ export const AppProvider = ({ children }) => {
     let totalAmount = 0;
     for (const items in cartItems) {
       let itemInfo = products.find((product) => product._id === items);
-      if (itemInfo && cartItems[items] > 0) { 
+      if (itemInfo && cartItems[items] > 0) {
         totalAmount += itemInfo.offerPrice * cartItems[items];
       }
     }
-    return totalAmount; 
+    return totalAmount;
   };
 
   useEffect(() => {
